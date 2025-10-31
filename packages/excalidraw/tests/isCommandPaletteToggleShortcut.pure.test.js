@@ -21,7 +21,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     };
   }
 
-  it("CT1: Base: Ctrl/Cmd + Shift + p", () => {
+  it("should return true for Ctrl/Cmd + Shift + p", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -31,7 +31,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(true);
   });
 
-  it("CT2: A falso (Alt cancela)", () => {
+  it("should return false when Alt is pressed", () => {
     const event = makeEvent({
       altKey: true,
       ctrlOrCmd: true,
@@ -41,7 +41,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT3: B falso (sem Ctrl/Cmd)", () => {
+  it("should return false when Ctrl/Cmd is not pressed", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: false,
@@ -51,7 +51,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT4: Caminho alternativo: Ctrl/Cmd + '/'", () => {
+  it("should return true for Ctrl/Cmd + '/'", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -61,7 +61,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(true);
   });
 
-  it("CT5: Nenhum atalho válido", () => {
+  it("should return false for invalid shortcut", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -71,7 +71,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT6: C falso com D verdadeiro (sem Shift)", () => {
+  it("should return false for Ctrl/Cmd + p without Shift", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -81,7 +81,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT7: D falso com C verdadeiro (tecla ≠ 'p')", () => {
+  it("should return false for Ctrl/Cmd + Shift + non-p key", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -91,7 +91,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT8: Ctrl/Cmd + Shift + 'P' (case-insensitive)", () => {
+  it("should return true for Ctrl/Cmd + Shift + 'P' (uppercase)", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
@@ -101,7 +101,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(true);
   });
 
-  it("CT9: Alt cancela até o caminho '/'", () => {
+  it("should return false when Alt is pressed with '/' shortcut", () => {
     const event = makeEvent({
       altKey: true,
       ctrlOrCmd: true,
@@ -111,7 +111,7 @@ describe("isCommandPaletteToggleShortcut (pure)", () => {
     expect(isCommandPaletteToggleShortcut(event)).toBe(false);
   });
 
-  it("CT10: Ctrl/Cmd + 'p' sem Shift (incompleto)", () => {
+  it("should return false for Ctrl/Cmd + p without Shift (incomplete)", () => {
     const event = makeEvent({
       altKey: false,
       ctrlOrCmd: true,
