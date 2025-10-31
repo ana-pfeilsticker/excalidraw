@@ -1,14 +1,6 @@
-const KEYS = { CTRL_OR_CMD: "ctrlKey", P: "p", SLASH: "/" };
-
-function isCommandPaletteToggleShortcut(event) {
-  return (
-    !event.altKey &&
-    event[KEYS.CTRL_OR_CMD] &&
-    ((event.shiftKey && event.key.toLowerCase() === KEYS.P) ||
-      event.key === KEYS.SLASH)
-  );
-}
-
+const {
+  isCommandPaletteToggleShortcut,
+} = require("../components/CommandPalette/isCommandPaletteToggleShortcut.pure");
 describe("isCommandPaletteToggleShortcut (pure)", () => {
   function makeEvent(params) {
     const { altKey, ctrlOrCmd, shiftKey, key } = params;
