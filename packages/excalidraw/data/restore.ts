@@ -756,12 +756,22 @@ export const restoreAppState = (
     const suppliedValue = appState[key];
 
     const localValue = localAppState ? localAppState[key] : undefined;
-    (nextAppState as any)[key] =
-      suppliedValue !== undefined
-        ? suppliedValue
-        : localValue !== undefined
-        ? localValue
-        : defaultValue;
+
+    // Fix for Issue #10345: Don't reuse old filename from localStorage
+    // when creating a new file. The 'name' field should only be restored
+    // if it comes from an imported appState (a saved file being opened),
+    // not from localStorage (which may contain an old timestamp).
+    if (key === "name") {
+      (nextAppState as any)[key] =
+        suppliedValue !== undefined ? suppliedValue : defaultValue;
+    } else {
+      (nextAppState as any)[key] =
+        suppliedValue !== undefined
+          ? suppliedValue
+          : localValue !== undefined
+          ? localValue
+          : defaultValue;
+    }
   }
 
   return {
